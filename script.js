@@ -17,13 +17,23 @@ $(document).ready(function() {
 
     function spawnCircle()
     {
+        var inner = document.createElement('div');
+        inner.setAttribute("class", "inner_circle");
+        var outer = document.createElement('div');
+        outer.setAttribute("class", "outer_circle");
+        setPosition(inner, outer)
+        $("#game").prepend(inner);
+        $("#game").prepend(outer);
+    }
+    function setPosition(inner, outer)
+    {
         spawnPosX = Math.random()* (windowWid-70) + loffset;
         spawnPosY = Math.random()* 550 + toffset;
-        $(".inner_circle").css("left", spawnPosX+20)
-                          .css("top", spawnPosY+20)
+        $(inner).css("left", spawnPosX+20)
+                .css("top", spawnPosY+20)
                           
-        $(".outer_circle").css("left", spawnPosX)
-                          .css("top", spawnPosY)
+        $(outer).css("left", spawnPosX)
+                .css("top", spawnPosY)
     }
     spawnCircle();
 })
