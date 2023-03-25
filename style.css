@@ -41,10 +41,10 @@ button
 .outer_circle
 {
     border-radius: 50%;
-    border: 5px white solid;
+    border: 4px white solid;
     background-color: transparent;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     position: absolute;
     top: inherit;
     left: inherit;
@@ -56,4 +56,6 @@ button
     width: 60px;
     height: 60px;
     position: absolute;
+    top: inherit;
+    left: inherit;
 }

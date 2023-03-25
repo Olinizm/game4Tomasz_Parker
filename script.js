@@ -1,6 +1,11 @@
 $(document).ready(function() {
     var mouseX = 0;
     var mouseY = 70;
+
+    var gameWindow = document.getElementById("game");
+    var loffset = gameWindow.offsetLeft;
+    var toffset = gameWindow.offsetTop;
+    var windowWid = gameWindow.offsetWidth
     
     $("#game").mousemove(function(event) {
         mouseX = event.pageX;
@@ -12,6 +17,13 @@ $(document).ready(function() {
 
     function spawnCircle()
     {
-        $(".inner_circle")
+        spawnPosX = Math.random()* (windowWid-70) + loffset;
+        spawnPosY = Math.random()* 550 + toffset;
+        $(".inner_circle").css("left", spawnPosX+20)
+                          .css("top", spawnPosY+20)
+                          
+        $(".outer_circle").css("left", spawnPosX)
+                          .css("top", spawnPosY)
     }
+    spawnCircle();
 })
