@@ -1,0 +1,59 @@
+* 
+{
+    padding: 0;
+    margin: 0;
+}
+nav
+{
+    width: 100%;
+    height: 60px;
+    background-color: hotpink;
+}
+
+#game
+{
+    width: 70%;
+    height: 600px;
+    margin: 0 auto;
+    background-color: grey;
+    cursor: none;
+}
+#cursor
+{
+    background-color: white;
+    height: 20px;
+    width: 20px;
+    top: inherit;
+    left: inherit;
+    border-radius: 50%;
+    position: absolute;
+}
+button
+{
+    border: none;
+    background-color: transparent;
+    outline: none;
+    margin: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    font-size: 20px;
+}
+.outer_circle
+{
+    border-radius: 50%;
+    border: 5px white solid;
+    background-color: transparent;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: inherit;
+    left: inherit;
+}
+.inner_circle
+{
+    border-radius: 50%;
+    background-color: hotpink;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+}
