@@ -20,13 +20,9 @@ $(document).ready(function() {
     })
 
     $(document).click(function() {
-        if(parseInt(Math.abs(mouseX - cPosX)) < 30 && parseInt(Math.abs(mouseY - cPosY)) < 30)
+        if(parseInt(Math.abs(mouseX - cPosX)) < 40 && parseInt(Math.abs(mouseY - cPosY)) < 40)
         {
-            console.log("jest");
-            spawnCircle();
-            console.log(cId);
-            $("#"+cId).remove();
-            $("#"+cId+"o").remove();
+            destroyCircle(cId);
             cId++;
             setCurrent(cId);
         }
@@ -37,11 +33,15 @@ $(document).ready(function() {
         var inner = document.createElement('div');
         inner.setAttribute('class', "inner_circle");
         inner.className = "inner_circle";
+        inner.innerHTML = nrId%9+1;
         inner.setAttribute("id", nrId);
+        
         var outer = document.createElement('div');
         outer.setAttribute('class', "outer_circle");
         outer.setAttribute("id", nrId+"o");
         setPosition(inner, outer)
+        setTimeout(destroyCircle, 2000, nrId);
+
         nrId++;
         
         $("#game").prepend(inner);
@@ -49,22 +49,35 @@ $(document).ready(function() {
     }
     function setPosition(inner, outer)
     {
-        spawnPosX = Math.random()* (windowWid-70) + loffset;
-        spawnPosY = Math.random()* 530 + toffset;
-        $(inner).css("left", spawnPosX+20)
-                .css("top", spawnPosY+20)
+        spawnPosX = Math.random()* (windowWid-90) + loffset;
+        spawnPosY = Math.random()* 520 + toffset;
+        $(inner).css("left", spawnPosX+31)
+                .css("top", spawnPosY+31)
                           
         $(outer).css("left", spawnPosX)
                 .css("top", spawnPosY)
     }
     function setCurrent(next)
     {
-        var circle = document.getElementById(next);
-        cPosX = circle.offsetLeft+30;
-        cPosY = circle.offsetTop+30;
-        console.log(cPosX + " " + cPosY)
+        if(parseInt(nrId) < parseInt(next))
+        {
+            setTimeout(setCurrent, 100, next)
+        }
+        else
+        {
+            var circle = document.getElementById(next);
+            cPosX = circle.offsetLeft+40;
+            cPosY = circle.offsetTop+40;
+            console.log(cPosX + " " + cPosY)
+        }
         
+    }
+    function destroyCircle(circleId, clicked)
+    {
+        $("#"+circleId).remove();
+        $("#"+circleId+"o").remove();
     }
     spawnCircle();
     setCurrent(0);
+    setInterval(spawnCircle, 1000)
 })

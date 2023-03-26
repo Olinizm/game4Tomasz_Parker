@@ -33,18 +33,19 @@ button
     border: none;
     background-color: transparent;
     outline: none;
-    margin: 15px;
+    margin: 10px 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
-    font-size: 20px;
+    font-size: 40px;
+    cursor: pointer;
 }
 .outer_circle
 {
     border-radius: 50%;
-    border: 4px white solid;
+    border: 3px white solid;
     background-color: transparent;
-    width: 90px;
-    height: 90px;
+    width: 140px;
+    height: 140px;
     position: absolute;
     top: inherit;
     left: inherit;
@@ -53,9 +54,15 @@ button
 {
     border-radius: 50%;
     background-color: hotpink;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     position: absolute;
     top: inherit;
     left: inherit;
+    color: white;
+    text-align: center;
+    border: 1px darkmagenta solid;
+    line-height: 80px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
 }
