@@ -23,8 +23,6 @@ $(document).ready(function() {
         if(parseInt(Math.abs(mouseX - cPosX)) < 40 && parseInt(Math.abs(mouseY - cPosY)) < 40)
         {
             destroyCircle(cId);
-            cId++;
-            setCurrent(cId);
         }
     })
 
@@ -59,7 +57,6 @@ $(document).ready(function() {
     }
     function setCurrent(next)
     {
-        console.log(nrId + ":" + next)
         if(parseInt(nrId) < parseInt(next)+1)
         {
             setTimeout(setCurrent, 100, next)
@@ -73,12 +70,19 @@ $(document).ready(function() {
         }
         
     }
-    function destroyCircle(circleId, clicked)
+    function destroyCircle(circleId)
     {
-        $("#"+circleId).remove();
-        $("#"+circleId+"o").remove();
+        var exists = document.getElementById(circleId);
+        if(exists) 
+        {
+            cId++;
+            setCurrent(cId);
+            $("#"+circleId).remove();
+            $("#"+circleId+"o").remove();
+        }
+        
     }
     spawnCircle();
     setCurrent(0);
-    setInterval(spawnCircle, 1000)
+    setInterval(spawnCircle, 1000);
 })
