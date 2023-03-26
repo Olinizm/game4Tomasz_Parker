@@ -40,7 +40,7 @@ $(document).ready(function() {
         outer.setAttribute('class', "outer_circle");
         outer.setAttribute("id", nrId+"o");
         setPosition(inner, outer)
-        setTimeout(destroyCircle, 2000, nrId);
+        setTimeout(destroyCircle, 3000, nrId);
 
         nrId++;
         
@@ -59,7 +59,8 @@ $(document).ready(function() {
     }
     function setCurrent(next)
     {
-        if(parseInt(nrId) < parseInt(next))
+        console.log(nrId + ":" + next)
+        if(parseInt(nrId) < parseInt(next)+1)
         {
             setTimeout(setCurrent, 100, next)
         }
