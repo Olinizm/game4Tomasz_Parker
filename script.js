@@ -1,16 +1,21 @@
 $(document).ready(function() {
+    //cursor position
     var mouseX = 0;
     var mouseY = 70;
+    //stores the id of next circle to create, and next circle to click
     var nrId = 0;
     var cId = 0;
+    //positions of the next circle to click
     var cPosX = 0;
     var cPosY = 0;
 
+    //getting game window size to addjust spawn position
     var gameWindow = document.getElementById("game");
     var loffset = gameWindow.offsetLeft;
     var toffset = gameWindow.offsetTop;
     var windowWid = gameWindow.offsetWidth;
     
+    //sets cursor position to mouse position
     $("#game").mousemove(function(event) {
         mouseX = event.pageX;
         mouseY = event.pageY;
@@ -19,6 +24,7 @@ $(document).ready(function() {
                     .css("left", mouseX - 10);
     })
 
+    //compares cursor position to cPos which stores position of the next circle to click
     $(document).click(function() {
         if(parseInt(Math.abs(mouseX - cPosX)) < 40 && parseInt(Math.abs(mouseY - cPosY)) < 40)
         {
@@ -26,6 +32,7 @@ $(document).ready(function() {
         }
     })
 
+    //creates a circle and displays in on the screen
     function spawnCircle()
     {
         var inner = document.createElement('div');
@@ -45,6 +52,8 @@ $(document).ready(function() {
         $("#game").prepend(inner);
         $("#game").prepend(outer);
     }
+    
+    //sets x and y positions to random for new made circles
     function setPosition(inner, outer)
     {
         spawnPosX = Math.random()* (windowWid-90) + loffset;
@@ -55,6 +64,8 @@ $(document).ready(function() {
         $(outer).css("left", spawnPosX)
                 .css("top", spawnPosY)
     }
+
+    //sets the cPos values to the next circle
     function setCurrent(next)
     {
         if(parseInt(nrId) < parseInt(next)+1)
@@ -70,6 +81,8 @@ $(document).ready(function() {
         }
         
     }
+
+    //destroys circle of a certain id if it exists on screen
     function destroyCircle(circleId)
     {
         var exists = document.getElementById(circleId);
@@ -82,7 +95,11 @@ $(document).ready(function() {
         }
         
     }
+
+    //first circle created manually
     spawnCircle();
     setCurrent(0);
+
+    //spawn circle every set interval
     setInterval(spawnCircle, 1000);
 })
