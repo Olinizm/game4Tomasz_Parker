@@ -40,6 +40,7 @@ $(document).ready(function() {
         inner.className = "inner_circle";
         inner.innerHTML = nrId%9+1;
         inner.setAttribute("id", nrId);
+        colorit(inner, nrId);
         
         var outer = document.createElement('div');
         outer.setAttribute('class', "outer_circle");
@@ -101,11 +102,27 @@ $(document).ready(function() {
     {
         $(outline).animate({ width: 75 }, {duration:3000, queue:false});
         $(outline).animate({ height: 75 }, {duration:3000, queue:false});
-        leftPos = outline.offsetLeft+32;
-        topPos = outline.offsetTop+32;
+        leftPos = outline.offsetLeft+31;
+        topPos = outline.offsetTop+31;
         $(outline).animate({ left:  leftPos }, {duration:3000, queue:false});
         $(outline).animate({ top:  topPos }, {duration:3000, queue:false});
 
+    }
+    function colorit(circle, idCircle)
+    {
+        colornr = parseInt(idCircle/9)%3 //Adamus helped me figure out why only 1s chenged color
+        switch(colornr)
+        {
+            case 0:
+                $(circle).css("background-color", "hotpink")
+                break;
+            case 1:
+                $(circle).css("background-color", "teal")
+                break;
+            case 2:
+                $(circle).css("background-color", "sandybrown")
+        }
+        
     }
 
     //first circle created manually
@@ -113,5 +130,5 @@ $(document).ready(function() {
     setCurrent(0);
 
     //spawn circle every set interval
-    setInterval(spawnCircle, 1000);
+    setInterval(spawnCircle, 100);
 })
