@@ -51,6 +51,7 @@ $(document).ready(function() {
         
         $("#game").prepend(inner);
         $("#game").prepend(outer);
+        shrink(outer);
     }
     
     //sets x and y positions to random for new made circles
@@ -94,6 +95,17 @@ $(document).ready(function() {
             $("#"+circleId+"o").remove();
         }
         
+    }
+
+    function shrink(outline)
+    {
+        $(outline).animate({ width: 75 }, {duration:3000, queue:false});
+        $(outline).animate({ height: 75 }, {duration:3000, queue:false});
+        leftPos = outline.offsetLeft+32;
+        topPos = outline.offsetTop+32;
+        $(outline).animate({ left:  leftPos }, {duration:3000, queue:false});
+        $(outline).animate({ top:  topPos }, {duration:3000, queue:false});
+
     }
 
     //first circle created manually
