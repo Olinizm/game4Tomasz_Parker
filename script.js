@@ -28,9 +28,26 @@ $(document).ready(function() {
     $(document).click(function() {
         if(parseInt(Math.abs(mouseX - cPosX)) < 40 && parseInt(Math.abs(mouseY - cPosY)) < 40)
         {
+            checkAcc(cId);
             destroyCircle(cId);
+            
         }
     })
+
+    function checkAcc(idc)
+    {
+        var iCircle = document.getElementById(idc).offsetWidth;
+        var oCircle =  document.getElementById(idc+"o").offsetWidth;
+        console.log(iCircle + ":" + oCircle)
+        if(Math.abs(iCircle-oCircle)<15)
+        {
+            console.log("jest")
+        }
+        else
+        {
+            console.log("nima")
+        }
+    }
 
     //creates a circle and displays in on the screen
     function spawnCircle()
@@ -79,7 +96,6 @@ $(document).ready(function() {
             var circle = document.getElementById(next);
             cPosX = circle.offsetLeft+40;
             cPosY = circle.offsetTop+40;
-            console.log(cPosX + " " + cPosY)
         }
         
     }
@@ -108,9 +124,11 @@ $(document).ready(function() {
         $(outline).animate({ top:  topPos }, {duration:3000, queue:false});
 
     }
+
+    //changes color depending on the id
     function colorit(circle, idCircle)
     {
-        colornr = parseInt(idCircle/9)%3 //Adamus helped me figure out why only 1s chenged color
+        colornr = parseInt(idCircle/9)%3 //Adamus helped me figure out why only 1s changed color
         switch(colornr)
         {
             case 0:
@@ -130,5 +148,5 @@ $(document).ready(function() {
     setCurrent(0);
 
     //spawn circle every set interval
-    setInterval(spawnCircle, 100);
+    setInterval(spawnCircle, 1000);
 })
