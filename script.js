@@ -14,6 +14,9 @@ $(document).ready(function() {
     var loffset = gameWindow.offsetLeft;
     var toffset = gameWindow.offsetTop;
     var windowWid = gameWindow.offsetWidth;
+
+    var score = 0;
+    var ScDisplay = document.getElementById("score")
     
     //sets cursor position to mouse position
     $("#game").mousemove(function(event) {
@@ -34,19 +37,36 @@ $(document).ready(function() {
         }
     })
 
+    //checks difference between inner and outer circle
     function checkAcc(idc)
     {
         var iCircle = document.getElementById(idc).offsetWidth;
         var oCircle =  document.getElementById(idc+"o").offsetWidth;
         console.log(iCircle + ":" + oCircle)
-        if(Math.abs(iCircle-oCircle)<15)
+        var difference = Math.abs(iCircle-oCircle)
+        if(difference<20)
         {
-            console.log("jest")
+            if(difference<10)
+            {
+                console.log("300");
+                score += 300;
+            }
+            else if(difference<15)
+            {
+                console.log("100");
+                score += 100;
+            }
+            else
+            {
+                console.log("50");
+                score += 50;
+            }
         }
         else
         {
-            console.log("nima")
+            console.log("miss");
         }
+        ScDisplay.innerHTML = "Score: "+ score;
     }
 
     //creates a circle and displays in on the screen
