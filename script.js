@@ -14,6 +14,8 @@ $(document).ready(function() {
     var loffset = gameWindow.offsetLeft;
     var toffset = gameWindow.offsetTop;
     var windowWid = gameWindow.offsetWidth;
+    var circOffset = 32;
+    var ar = 3000;
 
     var score = 0;
     var ScDisplay = document.getElementById("score")
@@ -83,7 +85,7 @@ $(document).ready(function() {
         outer.setAttribute('class', "outer_circle");
         outer.setAttribute("id", nrId+"o");
         setPosition(inner, outer)
-        setTimeout(destroyCircle, 3000, nrId);
+        setTimeout(destroyCircle, ar, nrId);
 
         nrId++;
         
@@ -97,8 +99,8 @@ $(document).ready(function() {
     {
         spawnPosX = Math.random()* (windowWid-90) + loffset;
         spawnPosY = Math.random()* 520 + toffset;
-        $(inner).css("left", spawnPosX+31)
-                .css("top", spawnPosY+31)
+        $(inner).css("left", spawnPosX+circOffset)
+                .css("top", spawnPosY+circOffset)
                           
         $(outer).css("left", spawnPosX)
                 .css("top", spawnPosY)
@@ -136,12 +138,12 @@ $(document).ready(function() {
 
     function shrink(outline)
     {
-        $(outline).animate({ width: 75 }, {duration:3000, queue:false});
-        $(outline).animate({ height: 75 }, {duration:3000, queue:false});
-        leftPos = outline.offsetLeft+31;
-        topPos = outline.offsetTop+31;
-        $(outline).animate({ left:  leftPos }, {duration:3000, queue:false});
-        $(outline).animate({ top:  topPos }, {duration:3000, queue:false});
+        $(outline).animate({ width: 75 }, {duration: ar, queue:false});
+        $(outline).animate({ height: 75 }, {duration: ar, queue:false});
+        leftPos = outline.offsetLeft+circOffset;
+        topPos = outline.offsetTop+circOffset;
+        $(outline).animate({ left:  leftPos }, {duration: ar, queue:false});
+        $(outline).animate({ top:  topPos }, {duration: ar, queue:false});
 
     }
 
