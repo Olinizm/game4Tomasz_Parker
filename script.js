@@ -5,11 +5,8 @@ $(document).ready(function() {
     var mouse = new position(0, 70);
     //stores the id of next circle to create, and next circle to click
     var nrId = 0;
-    var cId = 0;
-    //positions of the next circle to click
-    var cPosX = 0;
-    var cPosY = 0;
 
+    //List of circles on the screen
     var circles = [];
 
     //getting game window size to addjust spawn position
@@ -37,8 +34,8 @@ $(document).ready(function() {
     $(document).click(function() {
         if(circles[0].inCircle(mouse))
         {
-            checkAcc(cId);
-            destroyCircle(cId, true);
+            checkAcc(circles[0].circleID);
+            destroyCircle(circles[0].circleID, true);
             
         }
     })
@@ -110,22 +107,6 @@ $(document).ready(function() {
         return new position(spawnPosX, spawnPosY);
     }
 
-    //sets the cPos values to the next circle
-    function setCurrent(next)
-    {
-        if(parseInt(nrId) < parseInt(next)+1)
-        {
-            setTimeout(setCurrent, 100, next)
-        }
-        else
-        {
-            var circle = document.getElementById(next);
-            cPosX = circle.offsetLeft+40;
-            cPosY = circle.offsetTop+40;
-        }
-        
-    }
-
     //destroys circle of a certain id if it exists on screen
     function destroyCircle(circleId, clicked)
     {
@@ -136,8 +117,6 @@ $(document).ready(function() {
             {
                 combo = 0;
             }
-            cId++;
-            setCurrent(cId);
             $("#"+circleId).remove();
             $("#"+circleId+"o").remove();
             circles.shift();
@@ -145,6 +124,7 @@ $(document).ready(function() {
         
     }
 
+    //outer circle animation
     function shrink(outline)
     {
         $(outline).animate({ width: 75 }, {duration: ar, queue:false});
@@ -176,7 +156,6 @@ $(document).ready(function() {
 
     //first circle created manually
     spawnCircle();
-    setCurrent(0);
 
     //spawn circle every set interval
     setInterval(spawnCircle, 1000);
