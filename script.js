@@ -1,13 +1,14 @@
 $(document).ready(function() {
     //cursor position
-    var mouseX = 0;
-    var mouseY = 70;
+    var mouse = new position(0, 70);
     //stores the id of next circle to create, and next circle to click
     var nrId = 0;
     var cId = 0;
     //positions of the next circle to click
     var cPosX = 0;
     var cPosY = 0;
+
+    var circles = [];
 
     //getting game window size to addjust spawn position
     var gameWindow = document.getElementById("game");
@@ -23,16 +24,16 @@ $(document).ready(function() {
     
     //sets cursor position to mouse position
     $("#game").mousemove(function(event) {
-        mouseX = event.pageX;
-        mouseY = event.pageY;
-        if(event.pageY < 70) mouseY = 70;
-        $("#cursor").css("top", mouseY - 10)
-                    .css("left", mouseX - 10);
+        mouse.x = event.pageX;
+        mouse.y = event.pageY;
+        if(event.pageY < 70) mouse.y = 70;
+        $("#cursor").css("top", mouse.y - 10)
+                    .css("left", mouse.x - 10);
     })
 
     //compares cursor position to cPos which stores position of the next circle to click
     $(document).click(function() {
-        if(parseInt(Math.abs(mouseX - cPosX)) < 40 && parseInt(Math.abs(mouseY - cPosY)) < 40)
+        if(parseInt(Math.abs(mouse.x - cPosX)) < 40 && parseInt(Math.abs(mouse.y - cPosY)) < 40)
         {
             checkAcc(cId);
             destroyCircle(cId, true);
