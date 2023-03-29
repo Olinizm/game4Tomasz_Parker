@@ -118,6 +118,7 @@ $(document).ready(function() {
             if(!clicked)
             {
                 combo = 0;
+                displayAcc(circles[0], "miss","rgba(255, 20, 20, 0.5)")
             }
             $("#"+circleId).remove();
             $("#"+circleId+"o").remove();
@@ -161,8 +162,8 @@ $(document).ready(function() {
         var accuracy = document.createElement('div');
         $(accuracy).text(points);
         $(accuracy).addClass("accuracy");
-        $(accuracy).css("top", circle.pos.y-circOffset)
-                   .css("left", circle.pos.x-circOffset)
+        $(accuracy).css("top", circle.pos.y-20)
+                   .css("left", circle.pos.x-20)
                    .css("text-shadow", "0px 0px 4px "+color)
         $("#game").append(accuracy);
         let destroyAcc = (displayed) => $(displayed).remove();
