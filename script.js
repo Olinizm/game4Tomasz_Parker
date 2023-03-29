@@ -1,3 +1,5 @@
+var circOffset = 32;
+
 $(document).ready(function() {
     //cursor position
     var mouse = new position(0, 70);
@@ -15,7 +17,7 @@ $(document).ready(function() {
     var loffset = gameWindow.offsetLeft;
     var toffset = gameWindow.offsetTop;
     var windowWid = gameWindow.offsetWidth;
-    var circOffset = 32;
+    
     var ar = 3000;
 
     var combo = 0;
@@ -54,17 +56,17 @@ $(document).ready(function() {
             if(difference<10)
             {
                 console.log("300");
-                score += 300 * (combo+1);
+                score += 300 * combo;
             }
             else if(difference<15)
             {
                 console.log("100");
-                score += 100 * (combo+1);
+                score += 100 * combo;
             }
             else
             {
                 console.log("50");
-                score += 50 * (combo+1);
+                score += 50 * combo;
             }
         }
         else
@@ -82,13 +84,16 @@ $(document).ready(function() {
         inner.setAttribute('class', "inner_circle");
         inner.innerHTML = nrId%9+1;
         inner.setAttribute("id", nrId);
+        
         colorit(inner, nrId);
         
         var outer = document.createElement('div');
         outer.setAttribute('class', "outer_circle");
         outer.setAttribute("id", nrId+"o");
-        setPosition(inner, outer)
+        circles.push(new circle(inner, outer, getPosition(), nrId))
+
         setTimeout(destroyCircle, ar, nrId, false);
+
 
         nrId++;
         
@@ -98,15 +103,11 @@ $(document).ready(function() {
     }
     
     //sets x and y positions to random for new made circles
-    function setPosition(inner, outer)
+    function getPosition()
     {
         spawnPosX = Math.random()* (windowWid-90) + loffset;
         spawnPosY = Math.random()* 520 + toffset;
-        $(inner).css("left", spawnPosX+circOffset)
-                .css("top", spawnPosY+circOffset)
-                          
-        $(outer).css("left", spawnPosX)
-                .css("top", spawnPosY)
+        return new position(spawnPosX, spawnPosY);
     }
 
     //sets the cPos values to the next circle

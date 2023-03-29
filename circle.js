@@ -16,6 +16,11 @@ class circle
         this.outer = outer;
         this.circleID = id;
         this.pos = new position(pos.x, pos.y);
+        $(this.inner).css("left", pos.x+circOffset)
+                     .css("top", pos.y+circOffset)
+                          
+        $(this.outer).css("left", pos.x)
+                     .css("top", pos.y)
     }
 
     inCircle(mousePos) 
