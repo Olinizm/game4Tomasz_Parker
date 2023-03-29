@@ -35,7 +35,7 @@ $(document).ready(function() {
 
     //compares cursor position to cPos which stores position of the next circle to click
     $(document).click(function() {
-        if(parseInt(Math.abs(mouse.x - cPosX)) < 40 && parseInt(Math.abs(mouse.y - cPosY)) < 40)
+        if(circles[0].inCircle(mouse))
         {
             checkAcc(cId);
             destroyCircle(cId, true);
@@ -140,6 +140,7 @@ $(document).ready(function() {
             setCurrent(cId);
             $("#"+circleId).remove();
             $("#"+circleId+"o").remove();
+            circles.shift();
         }
         
     }
