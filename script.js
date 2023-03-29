@@ -17,6 +17,7 @@ $(document).ready(function() {
     var circOffset = 32;
     var ar = 3000;
 
+    var combo = 0;
     var score = 0;
     var ScDisplay = document.getElementById("score")
     
@@ -34,7 +35,7 @@ $(document).ready(function() {
         if(parseInt(Math.abs(mouseX - cPosX)) < 40 && parseInt(Math.abs(mouseY - cPosY)) < 40)
         {
             checkAcc(cId);
-            destroyCircle(cId);
+            destroyCircle(cId, true);
             
         }
     })
@@ -48,25 +49,27 @@ $(document).ready(function() {
         var difference = Math.abs(iCircle-oCircle)
         if(difference<20)
         {
+            combo++;
             if(difference<10)
             {
                 console.log("300");
-                score += 300;
+                score += 300 * (combo+1);
             }
             else if(difference<15)
             {
                 console.log("100");
-                score += 100;
+                score += 100 * (combo+1);
             }
             else
             {
                 console.log("50");
-                score += 50;
+                score += 50 * (combo+1);
             }
         }
         else
         {
             console.log("miss");
+            combo = 0;
         }
         ScDisplay.innerHTML = "Score: "+ score;
     }
@@ -76,7 +79,6 @@ $(document).ready(function() {
     {
         var inner = document.createElement('div');
         inner.setAttribute('class', "inner_circle");
-        inner.className = "inner_circle";
         inner.innerHTML = nrId%9+1;
         inner.setAttribute("id", nrId);
         colorit(inner, nrId);
@@ -85,7 +87,7 @@ $(document).ready(function() {
         outer.setAttribute('class', "outer_circle");
         outer.setAttribute("id", nrId+"o");
         setPosition(inner, outer)
-        setTimeout(destroyCircle, ar, nrId);
+        setTimeout(destroyCircle, ar, nrId, false);
 
         nrId++;
         
@@ -123,11 +125,15 @@ $(document).ready(function() {
     }
 
     //destroys circle of a certain id if it exists on screen
-    function destroyCircle(circleId)
+    function destroyCircle(circleId, clicked)
     {
         var exists = document.getElementById(circleId);
         if(exists) 
         {
+            if(!clicked)
+            {
+                combo = 0;
+            }
             cId++;
             setCurrent(cId);
             $("#"+circleId).remove();
