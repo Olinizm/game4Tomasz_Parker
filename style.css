@@ -17,6 +17,7 @@ nav
     margin: 0 auto;
     background-color: grey;
     cursor: none;
+    user-select: none;
 }
 #cursor
 {
@@ -65,4 +66,12 @@ button
     line-height: 80px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40px;
+}
+.accuracy
+{
+    color: rgba(255,255,255,0.8);
+    -webkit-font-smoothing: antialiased;
+    font-size: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
 }

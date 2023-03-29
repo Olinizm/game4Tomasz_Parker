@@ -1,3 +1,4 @@
+//I put it here because it's used by other js files
 var circOffset = 32;
 
 $(document).ready(function() {
@@ -15,8 +16,10 @@ $(document).ready(function() {
     var toffset = gameWindow.offsetTop;
     var windowWid = gameWindow.offsetWidth;
     
+    //outer circles approach rate
     var ar = 3000;
 
+    //score and combo variables and displays
     var combo = 0;
     var score = 0;
     var ScDisplay = document.getElementById("score")
@@ -30,45 +33,44 @@ $(document).ready(function() {
                     .css("left", mouse.x - 10);
     })
 
-    //compares cursor position to cPos which stores position of the next circle to click
+    //compares cursor position to the position of the first circle
     $(document).click(function() {
         if(circles[0].inCircle(mouse))
         {
-            checkAcc(circles[0].circleID);
+            checkAcc(circles[0]);
             destroyCircle(circles[0].circleID, true);
             
         }
     })
 
     //checks difference between inner and outer circle
-    function checkAcc(idc)
+    function checkAcc(circle)
     {
-        var iCircle = document.getElementById(idc).offsetWidth;
-        var oCircle =  document.getElementById(idc+"o").offsetWidth;
-        console.log(iCircle + ":" + oCircle)
+        var iCircle = circle.inner.offsetWidth;
+        var oCircle =  circle.outer.offsetWidth;
         var difference = Math.abs(iCircle-oCircle)
         if(difference<20)
         {
             combo++;
-            if(difference<10)
+            if(difference<8)
             {
-                console.log("300");
+                displayAcc(circle, 300,"rgba(47, 200, 255, 0.8)")
                 score += 300 * combo;
             }
             else if(difference<15)
             {
-                console.log("100");
+                displayAcc(circle, 100,"rgba(30, 255, 50, 0.5)")
                 score += 100 * combo;
             }
             else
             {
-                console.log("50");
+                displayAcc(circle, 50,"rgba(255, 183, 17, 0.5)")
                 score += 50 * combo;
             }
         }
         else
         {
-            console.log("miss");
+            displayAcc(circle, "miss","rgba(255, 20, 20, 0.5)")
             combo = 0;
         }
         ScDisplay.innerHTML = "Score: "+ score;
@@ -82,12 +84,12 @@ $(document).ready(function() {
         inner.innerHTML = nrId%9+1;
         inner.setAttribute("id", nrId);
         
-        colorit(inner, nrId);
-        
         var outer = document.createElement('div');
         outer.setAttribute('class', "outer_circle");
         outer.setAttribute("id", nrId+"o");
+
         circles.push(new circle(inner, outer, getPosition(), nrId))
+        colorit(inner, nrId);
 
         setTimeout(destroyCircle, ar, nrId, false);
 
@@ -152,6 +154,19 @@ $(document).ready(function() {
                 $(circle).css("background-color", "sandybrown")
         }
         
+    }
+
+    function displayAcc(circle, points, color)
+    {
+        var accuracy = document.createElement('div');
+        $(accuracy).text(points);
+        $(accuracy).addClass("accuracy");
+        $(accuracy).css("top", circle.pos.y-circOffset)
+                   .css("left", circle.pos.x-circOffset)
+                   .css("text-shadow", "0px 0px 4px "+color)
+        $("#game").append(accuracy);
+        let destroyAcc = (displayed) => $(displayed).remove();
+        setTimeout(destroyAcc, 800, accuracy);
     }
 
     //first circle created manually
