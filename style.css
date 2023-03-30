@@ -9,12 +9,12 @@ body
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
+    user-select: none;
 }
 nav
 {
     width: 100%;
     height: 60px;
-    background-color: hotpink;
 }
 
 #game
@@ -24,7 +24,6 @@ nav
     margin: 0 auto;
     border: 2px solid white;
     cursor: none;
-    user-select: none;
 }
 #cursor
 {
@@ -69,7 +68,7 @@ button
     left: inherit;
     color: white;
     text-align: center;
-    border: 1px darkmagenta solid;
+    border: 2px darkmagenta solid;
     line-height: 80px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 40px;
@@ -81,4 +80,21 @@ button
     font-size: 26px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: absolute;
+}
+#score
+{
+    left: 80%;
+    top: 15px;
+}
+#combo
+{
+    bottom: 10px;
+    right: 87%;
+}
+p
+{
+    position: absolute;
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
 }

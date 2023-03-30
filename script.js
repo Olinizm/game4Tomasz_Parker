@@ -1,5 +1,5 @@
 //I put it here because it's used by other js files
-var circOffset = 33;
+var circOffset = 30;
 
 $(document).ready(function() {
     //cursor position
@@ -43,7 +43,7 @@ $(document).ready(function() {
         mouse.y = event.pageY;
         //makes sure the cursor doesn't leave the game window
         if(event.pageY < 70) mouse.y = 70;
-        if(event.pageY > 0.98*$(window).height()) mouse.y = $(window).height()*0.98;
+        if(event.pageY > 0.97*$(window).height()) mouse.y = $(window).height()*0.97;
         $("#cursor").css("top", mouse.y - 10)
                     .css("left", mouse.x - 10);
     })
@@ -88,7 +88,8 @@ $(document).ready(function() {
             displayAcc(circle, "miss","rgba(255, 20, 20, 0.8)")
             combo = 0;
         }
-        $("#score").text("Score: "+score);
+        $("#score").text(score);
+        $("#combo").text(combo+"x");
     }
 
     //creates a circle and displays in on the screen
@@ -134,6 +135,7 @@ $(document).ready(function() {
             {
                 combo = 0;
                 displayAcc(circles[0], "miss","rgba(255, 20, 20, 0.5)")
+                $("#combo").text("0x");
             }
             $("#"+circleId).remove();
             $("#"+circleId+"o").remove();
@@ -147,8 +149,8 @@ $(document).ready(function() {
     {
         $(outline).animate({ width: 75 }, {duration: ar, queue:false});
         $(outline).animate({ height: 75 }, {duration: ar, queue:false});
-        leftPos = outline.offsetLeft+circOffset;
-        topPos = outline.offsetTop+circOffset;
+        leftPos = outline.offsetLeft+circOffset+1;
+        topPos = outline.offsetTop+circOffset+1;
         $(outline).animate({ left:  leftPos }, {duration: ar, queue:false});
         $(outline).animate({ top:  topPos }, {duration: ar, queue:false});
 
