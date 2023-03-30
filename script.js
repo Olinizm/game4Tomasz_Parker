@@ -44,6 +44,8 @@ $(document).ready(function() {
         //makes sure the cursor doesn't leave the game window
         if(event.pageY < 70) mouse.y = 70;
         if(event.pageY > 0.97*$(window).height()) mouse.y = $(window).height()*0.97;
+        if(event.pageX < 0.15*$(window).width()) mouse.x = 0.15*$(window).width();
+        if(event.pageX > 0.85*$(window).width()) mouse.x = 0.85*$(window).width();
         $("#cursor").css("top", mouse.y - 10)
                     .css("left", mouse.x - 10);
     })
