@@ -1,5 +1,5 @@
 //I put it here because it's used by other js files
-var circOffset = 32;
+var circOffset = 33;
 
 $(document).ready(function() {
     //cursor position
@@ -10,11 +10,23 @@ $(document).ready(function() {
     //List of circles on the screen
     var circles = [];
 
+    
+
     //getting game window size to addjust spawn position
+    $("#game").css("height", $(window).height()*0.9);
+    $("#game").css("width", $(window).width()*0.7);
     var gameWindow = document.getElementById("game");
     var loffset = gameWindow.offsetLeft;
     var toffset = gameWindow.offsetTop;
     var windowWid = gameWindow.offsetWidth;
+
+    $(window).resize(function() {
+        $("#game").css("height", $(window).height()*0.9);
+        $("#game").css("width", $(window).width()*0.7);
+        loffset = gameWindow.offsetLeft;
+        toffset = gameWindow.offsetTop;
+        windowWid = gameWindow.offsetWidth;
+    })
     
     //outer circles approach rate
     var ar = 3000;
@@ -73,7 +85,7 @@ $(document).ready(function() {
             displayAcc(circle, "miss","rgba(255, 20, 20, 0.5)")
             combo = 0;
         }
-        ScDisplay.innerHTML = "Score: "+ score;
+        $("#score").text("Score: "+score);
     }
 
     //creates a circle and displays in on the screen
