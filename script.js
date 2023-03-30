@@ -20,6 +20,7 @@ $(document).ready(function() {
     var toffset = gameWindow.offsetTop;
     var windowWid = gameWindow.offsetWidth;
 
+    //dynamically resizes the window
     $(window).resize(function() {
         $("#game").css("height", $(window).height()*0.9);
         $("#game").css("width", $(window).width()*0.7);
@@ -40,7 +41,9 @@ $(document).ready(function() {
     $("#game").mousemove(function(event) {
         mouse.x = event.pageX;
         mouse.y = event.pageY;
+        //makes sure the cursor doesn't leave the game window
         if(event.pageY < 70) mouse.y = 70;
+        if(event.pageY > 0.98*$(window).height()) mouse.y = $(window).height()*0.98;
         $("#cursor").css("top", mouse.y - 10)
                     .css("left", mouse.x - 10);
     })
@@ -71,18 +74,18 @@ $(document).ready(function() {
             }
             else if(difference<15)
             {
-                displayAcc(circle, 100,"rgba(30, 255, 50, 0.5)")
+                displayAcc(circle, 100,"rgba(30, 255, 50, 0.8)")
                 score += 100 * combo;
             }
             else
             {
-                displayAcc(circle, 50,"rgba(255, 183, 17, 0.5)")
+                displayAcc(circle, 50,"rgba(255, 183, 17, 0.8)")
                 score += 50 * combo;
             }
         }
         else
         {
-            displayAcc(circle, "miss","rgba(255, 20, 20, 0.5)")
+            displayAcc(circle, "miss","rgba(255, 20, 20, 0.8)")
             combo = 0;
         }
         $("#score").text("Score: "+score);
