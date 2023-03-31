@@ -4,7 +4,7 @@ var circOffset = 30;
 $(document).ready(function() {
     //cursor position
     var mouse = new position(0, 70);
-    //stores the id of next circle to create, and next circle to click
+    //stores the id of next circle to create
     var nrId = 0;
 
     //List of circles on the screen
@@ -35,7 +35,12 @@ $(document).ready(function() {
     //score and combo variables and displays
     var combo = 0;
     var score = 0;
-    var ScDisplay = document.getElementById("score")
+    var hp = 100;
+
+    //hp deploying mechanics
+    $("#hp").animate({width: "0%"}, {duration: 12500, queue: false});
+    let deployHP = () => hp-=0.8;
+    setInterval(deployHP, 100);
     
     //sets cursor position to mouse position
     $("#game").mousemove(function(event) {
@@ -73,25 +78,31 @@ $(document).ready(function() {
             {
                 displayAcc(circle, 300,"rgba(47, 200, 255, 0.8)")
                 score += 300 * combo;
+                hp+=15;
             }
             else if(difference<15)
             {
                 displayAcc(circle, 100,"rgba(30, 255, 50, 0.8)")
                 score += 100 * combo;
+                hp+=10;
             }
             else
             {
                 displayAcc(circle, 50,"rgba(255, 183, 17, 0.8)")
                 score += 50 * combo;
+                hp+=5;
             }
+            
         }
         else
         {
             displayAcc(circle, "miss","rgba(255, 20, 20, 0.8)")
             combo = 0;
+            hp-=10;
         }
         $("#score").text(score);
         $("#combo").text(combo+"x");
+        displayHP();
     }
 
     //creates a circle and displays in on the screen
@@ -123,7 +134,7 @@ $(document).ready(function() {
     function getPosition()
     {
         spawnPosX = Math.random()* (windowWid-90) + loffset;
-        spawnPosY = Math.random()* 520 + toffset;
+        spawnPosY = Math.random()* ($(window).height()*0.9-140) + toffset;
         return new position(spawnPosX, spawnPosY);
     }
 
@@ -138,6 +149,8 @@ $(document).ready(function() {
                 combo = 0;
                 displayAcc(circles[0], "miss","rgba(255, 20, 20, 0.5)")
                 $("#combo").text("0x");
+                hp-=10;
+                displayHP();
             }
             $("#"+circleId).remove();
             $("#"+circleId+"o").remove();
@@ -189,9 +202,19 @@ $(document).ready(function() {
         setTimeout(destroyAcc, 800, accuracy);
     }
 
+    function displayHP()
+    {
+        if(hp > 100) hp = 100;
+        if(hp < 0) hp = 0;
+        $("#hp").stop();
+        $("#hp").css("width", hp+"%")
+        $("#hp").animate({width: "0%"}, {duration: 12500, queue: false});
+    }
+
     //first circle created manually
     spawnCircle();
 
     //spawn circle every set interval
     setInterval(spawnCircle, 1000);
+    
 })

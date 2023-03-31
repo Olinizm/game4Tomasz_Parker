@@ -24,6 +24,7 @@ nav
     margin: 0 auto;
     border: 2px solid white;
     cursor: none;
+    background-color: rgba(0,0,0,0.5);
 }
 #cursor
 {
@@ -105,15 +106,24 @@ p
     margin: 20px 10px;
     left: 5%;
     width: 25%;
-    background-color: palevioletred;
     border-radius: 20%;
     border: 3px solid black;
+    background-color: rgba(0,0,0,0.5);
 }
-#hpbar img
+#hp
+{
+    background-color: palevioletred;
+    top: inherit;
+    left: +5px;
+    height: inherit;
+    border-radius: 25%;
+    width: 100%;
+}
+#hpIco
 {
     position: absolute;
     top: -10px;
-    left: -10px;
+    left: -12px;
     height: 60px;
     width: auto;
 }
