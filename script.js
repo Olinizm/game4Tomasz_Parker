@@ -10,7 +10,13 @@ $(document).ready(function() {
     //List of circles on the screen
     var circles = [];
 
-    
+    var music = document.getElementById("bgMusic");
+    music.addEventListener("ended", function(){
+        music.currentTime = 0;
+        clearInterval(spawnManager);
+        finished = true;
+    });
+    var finished = false;
 
     //getting game window size to addjust spawn position
     $("#game").css("height", $(window).height()*0.9);
@@ -61,7 +67,10 @@ $(document).ready(function() {
         {
             checkAcc(circles[0]);
             destroyCircle(circles[0].circleID, true);
-            
+            if(!music.isPlaying && !finished)
+            {
+                music.play();
+            }
         }
     })
 
@@ -215,6 +224,6 @@ $(document).ready(function() {
     spawnCircle();
 
     //spawn circle every set interval
-    setInterval(spawnCircle, 1000);
+    var spawnManager = setInterval(spawnCircle, 1000);
     
 })
