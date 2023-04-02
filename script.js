@@ -11,6 +11,7 @@ $(document).ready(function() {
     var circles = [];
 
     var music = document.getElementById("bgMusic");
+    music.volume = 0.2;
     music.addEventListener("ended", function(){
         music.currentTime = 0;
         clearInterval(spawnManager);
@@ -34,6 +35,9 @@ $(document).ready(function() {
         toffset = gameWindow.offsetTop;
         windowWid = gameWindow.offsetWidth;
     })
+
+    //creates the game over screen to use
+    var gameOverScreen = new deathScreen;
     
     //outer circles approach rate
     var ar = 3000;
@@ -153,7 +157,7 @@ $(document).ready(function() {
         var exists = document.getElementById(circleId);
         if(exists) 
         {
-            if(!clicked)
+            if(!clicked && !finished)
             {
                 combo = 0;
                 displayAcc(circles[0], "miss","rgba(255, 20, 20, 0.5)")
@@ -214,10 +218,31 @@ $(document).ready(function() {
     function displayHP()
     {
         if(hp > 100) hp = 100;
-        if(hp < 0) hp = 0;
-        $("#hp").stop();
-        $("#hp").css("width", hp+"%")
-        $("#hp").animate({width: "0%"}, {duration: 12500, queue: false});
+        if(hp <= 0 && !finished) 
+        {
+            hp = 0;
+            $("#hp").css("width", hp+"%")
+            gameOver();
+            
+        }
+        else
+        {
+            $("#hp").stop();
+            $("#hp").css("width", hp+"%")
+            $("#hp").animate({width: "0%"}, {duration: 12500, queue: false});
+        }
+    }
+
+    function gameOver()
+    {
+        finished = true;
+        music.pause();
+        gameOverScreen.show();
+        clearInterval(spawnManager);
+        $(".outer").stop();
+        circles.forEach(element => {
+            destroyCircle(element.circleID, false);
+        });
     }
 
     //first circle created manually

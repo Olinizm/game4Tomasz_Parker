@@ -127,3 +127,16 @@ p
     height: 60px;
     width: auto;
 }
+.popup
+{
+    position: absolute;
+    background-color: rgb(58, 43, 43);
+    border: 2px solid white;
+    color: white;
+    padding-top: 10px;
+    font-size: 34px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    border-radius: 10%;
+    display: none;
+}
